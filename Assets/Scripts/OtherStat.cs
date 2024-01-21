@@ -4,8 +4,8 @@ using UnityEngine;
 
 [System.Serializable] public class OtherStat : Stat
 {
-    public override int GetFinalStat(int level)
+    public override int GetFinalStat()
     {
-        return Mathf.FloorToInt((Mathf.FloorToInt((2 * baseStat + ivStat + Mathf.FloorToInt(evStat / 4)) * level / 100) + 5) * natureMultiplier);
+        return Mathf.FloorToInt((Mathf.FloorToInt((2 * baseStat + ivStat + Mathf.FloorToInt(evStat / 4)) * parent.GetLevel() / 100) + 5) * natureMultiplier);
     }
 }

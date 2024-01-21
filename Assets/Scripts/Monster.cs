@@ -4,7 +4,12 @@ using System.Linq;
 using UnityEngine;
 public class Monster : MonoBehaviour
 {
+    [SerializeField] private Sprite backSprite;
+    [SerializeField] private Sprite frontSprite;
+
+    [SerializeField] private string monsterName;
     [SerializeField] private int level = 1;
+
     [SerializeField] private string natureName;
     [SerializeField] private List<PowerType> monsterTypes = new List<PowerType>();
     [SerializeField] private Move[] moves = new Move[4];
@@ -17,6 +22,16 @@ public class Monster : MonoBehaviour
     [SerializeField] private OtherStat speed;
 
     Dictionary<string, Stat[]> natures = new Dictionary<string, Stat[]>();
+
+    private void Awake()
+    {
+        CreateNatures();
+        natureName = GetRandomNature();
+        AssignNature(natureName);
+        GenerateIV();
+        SetParentForStats();
+        hp.currentHp = hp.GetFinalStat();
+    }
     private void CreateNatures()
     {
         natures.Add("Hardy", new Stat[0]);
@@ -70,17 +85,69 @@ public class Monster : MonoBehaviour
         speed.GenerateRandomIV();
     }
 
-    private void Start()
-    {
-        CreateNatures();
-        natureName = GetRandomNature();
-        AssignNature(natureName);
-        GenerateIV();
-    }
-
     private void OnValidate()
     {
         level = Mathf.Clamp(level, 1, 100);
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public HPStat GetHp()
+    {
+        return hp;
+    }
+
+    public Stat GetAttack()
+    {
+        return attack;
+    }
+
+    public Stat GetDefense()
+    {
+        return defense;
+    }
+
+    public Stat GetSpattack()
+    {
+        return spattack;
+    }
+
+    public Stat GetSpdefense()
+    {
+        return spdefense;
+    }
+
+    public Stat GetSpeed()
+    {
+        return speed;
+    }
+
+    public Sprite GetFrontSprite()
+    {
+        return frontSprite;
+    }
+
+    public Sprite GetBackSprite()
+    {
+        return backSprite;
+    }
+
+    public string GetMonsterName()
+    {
+        return monsterName;
+    }
+
+    private void SetParentForStats()
+    {
+        hp.SetParent(this);
+        attack.SetParent(this);
+        defense.SetParent(this);
+        spattack.SetParent(this);
+        spdefense.SetParent(this);
+        speed.SetParent(this);
     }
 }
 
