@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Station : MonoBehaviour
 {
-    private Monster _monster;
+    public Monster currentMonster;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] TextMeshProUGUI statusText;
@@ -14,15 +14,19 @@ public class Station : MonoBehaviour
     [SerializeField] SpriteRenderer spritePosition;
 
     [SerializeField] bool isFront;
+    [SerializeField] UI _ui;
+    [SerializeField] TurnManager turnManager;
+
     public void SendMonster(Monster monster)
     {
-        _monster = monster;
+        currentMonster = monster;
         nameText.text = monster.GetMonsterName();
         hpSlider.maxValue = monster.GetHp().GetFinalStat();
         UpdateHp();
         if (!isFront)
         {
             spritePosition.sprite = monster.GetFrontSprite();
+            _ui.UpdateMoveText(currentMonster);
         }
         else
         {
@@ -32,8 +36,14 @@ public class Station : MonoBehaviour
 
     public void UpdateHp()
     {
-        hpText.text = $"{_monster.GetHp().currentHp} / {_monster.GetHp().GetFinalStat()}";
-        hpSlider.value = _monster.GetHp().currentHp;
+        int maxHp = currentMonster.GetHp().GetFinalStat();
+        int newHp = currentMonster.GetHp().GetCurrentHp();
+        hpText.text = $"{newHp} / {maxHp}";
+        hpSlider.value = newHp;
+        if(newHp == 0)
+        {
+            turnManager.GameOver();
+        }
     }
 
 }

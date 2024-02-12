@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519874407294946764, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
       propertyPath: m_Name
-      value: Sandshrew Variant
+      value: Sandshrew
       objectReference: {fileID: 0}
     - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
       propertyPath: m_RootOrder
@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: spdefense.baseStat
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: moves.Array.data[0]
+      value: 
+      objectReference: {fileID: 7896485343592981444, guid: e423f05d7e6e4f44ba9e0c169fe0d330, type: 3}
     - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
       propertyPath: monsterTypes.Array.size
       value: 1

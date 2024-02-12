@@ -30,7 +30,7 @@ public class Monster : MonoBehaviour
         AssignNature(natureName);
         GenerateIV();
         SetParentForStats();
-        hp.currentHp = hp.GetFinalStat();
+        hp.SetCurrentHp(hp.GetFinalStat());
     }
     private void CreateNatures()
     {
@@ -138,6 +138,16 @@ public class Monster : MonoBehaviour
     public string GetMonsterName()
     {
         return monsterName;
+    }
+
+    public Move GetMove(int index)
+    {
+        return moves[index];
+    }
+
+    public int GetMovesSize()
+    {
+        return moves.Length;
     }
 
     private void SetParentForStats()

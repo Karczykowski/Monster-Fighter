@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] private PowerType moveType;
-    [SerializeField] private MoveCategory moveCategory;
-    [SerializeField] private int movePp;
-    [SerializeField] private int movePower;
-    [SerializeField] private int moveAccuracy;
-    [SerializeField] private bool moveIsContact;
+    public PowerType moveType;
+    public MoveCategory moveCategory;
+    public int movePp;
+    public int movePower;
+    public int moveAccuracy;
+    public bool moveIsContact;
 }
