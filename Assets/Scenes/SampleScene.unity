@@ -1012,6 +1012,8 @@ MonoBehaviour:
   playerStation: {fileID: 586121639}
   enemyStation: {fileID: 1981904301}
   gameOverPanel: {fileID: 256716987}
+  ui: {fileID: 219881535}
+  actionDelayTime: 1
 --- !u!1 &316193071
 GameObject:
   m_ObjectHideFlags: 0

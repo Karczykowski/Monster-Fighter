@@ -7,7 +7,7 @@ using UnityEngine;
     [SerializeField] private int currentHp;
     public override int GetFinalStat()
     {
-        return Mathf.FloorToInt((2 * baseStat + ivStat + Mathf.FloorToInt(evStat/4) * parent.GetLevel() )/100) + parent.GetLevel() + 10;
+        return Mathf.FloorToInt(((2 * baseStat + ivStat + Mathf.FloorToInt(evStat/4)) * parent.GetLevel() )/100) + parent.GetLevel() + 10;
     }
 
     public void SetCurrentHp(int newHp)

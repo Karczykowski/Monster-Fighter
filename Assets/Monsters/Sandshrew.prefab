@@ -56,6 +56,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: level
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
       propertyPath: BackSprite
       value: 
       objectReference: {fileID: 21300000, guid: b4cd5d5bace3f0b4bb0c4e1d4477feb1, type: 3}

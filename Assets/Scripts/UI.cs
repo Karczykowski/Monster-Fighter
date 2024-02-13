@@ -20,15 +20,15 @@ public class UI : MonoBehaviour
     {
         if (currentStance != StationStance.DEFAULT)
             return;
-        infoPanel.SetActive(false);
-        attackPanel.SetActive(true);
+        DisableInfoPanel();
+        EnableAttackPanel();
         currentStance = StationStance.ATTACK;
     }
 
     public void InfoOption()
     {
-        attackPanel.SetActive(false);
-        infoPanel.SetActive(true);
+        DisableAttackPanel();
+        EnableAttackPanel();
         currentStance = StationStance.DEFAULT;
     }
 
@@ -46,5 +46,22 @@ public class UI : MonoBehaviour
                 moveButtons[i].interactable = false;
             }
         }
+    }
+
+    public void DisableInfoPanel()
+    {
+        infoPanel.SetActive(false);
+    }
+    public void EnableInfoPanel()
+    {
+        infoPanel.SetActive(true);
+    }
+    public void DisableAttackPanel()
+    {
+        attackPanel.SetActive(false);
+    }
+    public void EnableAttackPanel()
+    {
+        attackPanel.SetActive(true);
     }
 }

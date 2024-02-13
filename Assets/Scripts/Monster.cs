@@ -21,16 +21,31 @@ public class Monster : MonoBehaviour
     [SerializeField] private OtherStat spdefense;
     [SerializeField] private OtherStat speed;
 
+    [SerializeField] private int finalAttack;
+    [SerializeField] private int finalDefense;
+    [SerializeField] private int finalSpecialAttack;
+    [SerializeField] private int finalSpecialDefense;
+    [SerializeField] private int finalSpeed;
+
     Dictionary<string, Stat[]> natures = new Dictionary<string, Stat[]>();
 
     private void Awake()
     {
         CreateNatures();
-        natureName = GetRandomNature();
-        AssignNature(natureName);
-        GenerateIV();
+        //natureName = GetRandomNature();
+        //AssignNature(natureName);
+        //GenerateIV();
         SetParentForStats();
         hp.SetCurrentHp(hp.GetFinalStat());
+    }
+
+    private void Start()
+    {
+        finalAttack = attack.GetFinalStat();
+        finalDefense = defense.GetFinalStat();
+        finalSpecialAttack = spattack.GetFinalStat();
+        finalSpecialDefense = spdefense.GetFinalStat();
+        finalSpeed = speed.GetFinalStat();
     }
     private void CreateNatures()
     {

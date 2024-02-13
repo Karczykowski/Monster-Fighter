@@ -10,13 +10,19 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private Station playerStation;
     [SerializeField] private Station enemyStation;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private UI ui;
+    [SerializeField] private float actionDelayTime;
 
     private void Start()
     {
         state = BattleState.START;
     }
-
     public void PlayTurn(int playerMoveIndex)
+    {
+        StartCoroutine(PlayTurnEnumerator(playerMoveIndex));
+    }
+
+    public IEnumerator PlayTurnEnumerator(int playerMoveIndex)
     {
         Monster firstMonster;
         Monster secondMonster;
@@ -25,15 +31,23 @@ public class TurnManager : MonoBehaviour
         {
             firstMonster = playerStation.currentMonster;
             secondMonster = enemyStation.currentMonster;
+            ui.DisableAttackPanel();
+            yield return new WaitForSeconds(actionDelayTime);
             ExecuteAction(playerMoveIndex, true);
+            yield return new WaitForSeconds(actionDelayTime);
             ExecuteAction(enemyMoveIndex, false);
+            ui.EnableAttackPanel();
         }
         else
         {
             firstMonster = enemyStation.currentMonster;
             secondMonster = playerStation.currentMonster;
+            ui.DisableAttackPanel();
+            yield return new WaitForSeconds(actionDelayTime);
             ExecuteAction(enemyMoveIndex, false);
+            yield return new WaitForSeconds(actionDelayTime);
             ExecuteAction(playerMoveIndex, true);
+            ui.EnableAttackPanel();
         }
     }
     public void ExecuteAction(int moveIndex, bool player)
@@ -55,7 +69,17 @@ public class TurnManager : MonoBehaviour
         }
         
         int baseDamage = GetBaseDamage(currentMove, currentMonster, enemyMonster);
-        enemyMonster.GetHp().SetCurrentHp(enemyMonster.GetHp().GetCurrentHp() - baseDamage);
+        string everyPossibleDmg = "";
+        for(float i=0.85f;i<=1;i+=0.01f)
+        {
+            everyPossibleDmg += Mathf.Round(i * baseDamage) + ", " ;
+        }
+        Debug.Log(everyPossibleDmg);
+        float random = Random.Range(85,100)/100f;
+        Debug.Log("Random multiplyer: " + random);
+        int finalDamage = (int)Mathf.Round(baseDamage * random);
+        Debug.Log("Final Damage: " + finalDamage);
+        enemyMonster.GetHp().SetCurrentHp(enemyMonster.GetHp().GetCurrentHp() - finalDamage);
 
         if (player)
         {
