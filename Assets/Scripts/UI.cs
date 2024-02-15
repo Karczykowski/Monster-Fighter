@@ -28,7 +28,7 @@ public class UI : MonoBehaviour
     public void InfoOption()
     {
         DisableAttackPanel();
-        EnableAttackPanel();
+        EnableInfoPanel();
         currentStance = StationStance.DEFAULT;
     }
 
@@ -36,7 +36,7 @@ public class UI : MonoBehaviour
     {
         for(int i = 0;i < 4;i++)
         {
-            if(currentMonster.GetMove(i) != null)
+            if (currentMonster.GetMove(i) != null)
             {
                 moveButtons[i].interactable = true;
                 moveButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = currentMonster.GetMove(i).name;

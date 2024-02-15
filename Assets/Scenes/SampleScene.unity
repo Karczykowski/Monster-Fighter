@@ -629,7 +629,7 @@ RectTransform:
   - {fileID: 401591079}
   - {fileID: 256716990}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -952,8 +952,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 296122845}
-  - component: {fileID: 296122844}
   - component: {fileID: 296122846}
+  - component: {fileID: 296122847}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -961,26 +961,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &296122844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296122843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ae3e4f5026ccf340bc2d5a5901cc11e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStation: {fileID: 586121639}
-  enemyStation: {fileID: 1981904301}
-  playerMonsters:
-  - {fileID: 6722098768043433626, guid: 44227b97fa25c8e45bd7cd2d550b8922, type: 3}
-  enemyMonsters:
-  - {fileID: 3001708657875717198, guid: fe8dec638bd88ed45a7f746792ee7869, type: 3}
-  attackButton: {fileID: 74021518}
-  otherButton: {fileID: 1536868924}
 --- !u!4 &296122845
 Transform:
   m_ObjectHideFlags: 0
@@ -1013,7 +993,20 @@ MonoBehaviour:
   enemyStation: {fileID: 1981904301}
   gameOverPanel: {fileID: 256716987}
   ui: {fileID: 219881535}
-  actionDelayTime: 1
+  actionDelayTime: 0.5
+  damageCalculator: {fileID: 296122847}
+--- !u!114 &296122847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296122843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad298528d6d4ad4c87f57490fa2d5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &316193071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1245,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &381438134
 GameObject:
@@ -1473,7 +1466,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 296122844}
+      - m_Target: {fileID: 1208264049}
         m_TargetAssemblyTypeName: MonsterSelector, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -1554,7 +1547,7 @@ Transform:
   - {fileID: 586121637}
   - {fileID: 1981904299}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &443687356
 GameObject:
@@ -3151,6 +3144,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200488643}
   m_CullTransparentMesh: 1
+--- !u!1 &1208264048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208264050}
+  - component: {fileID: 1208264049}
+  m_Layer: 0
+  m_Name: MonsterSelector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1208264049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208264048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae3e4f5026ccf340bc2d5a5901cc11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStation: {fileID: 586121639}
+  enemyStation: {fileID: 1981904301}
+  playerMonsters:
+  - {fileID: 6722098768043433626, guid: 44227b97fa25c8e45bd7cd2d550b8922, type: 3}
+  enemyMonsters:
+  - {fileID: 3001708657875717198, guid: fe8dec638bd88ed45a7f746792ee7869, type: 3}
+  attackButton: {fileID: 74021518}
+  otherButton: {fileID: 1536868924}
+--- !u!4 &1208264050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208264048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1209075122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3278,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1264420032
 GameObject:

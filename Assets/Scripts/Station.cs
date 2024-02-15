@@ -26,11 +26,11 @@ public class Station : MonoBehaviour
         if (!isFront)
         {
             spritePosition.sprite = monster.GetFrontSprite();
-            _ui.UpdateMoveText(currentMonster);
         }
         else
         {
             spritePosition.sprite = monster.GetBackSprite();
+            _ui.UpdateMoveText(monster);
         }
     }
 

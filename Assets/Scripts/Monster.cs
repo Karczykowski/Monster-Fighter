@@ -31,7 +31,7 @@ public class Monster : MonoBehaviour
 
     private void Awake()
     {
-        CreateNatures();
+        CreateNatures(); 
         //natureName = GetRandomNature();
         //AssignNature(natureName);
         //GenerateIV();
@@ -160,6 +160,10 @@ public class Monster : MonoBehaviour
         return moves[index];
     }
 
+    public void ReadEachMove()
+    {
+        Debug.Log(moves[0] + ", " + moves[1] + ", " + moves[2] + ", " + moves[3]);
+    }
     public int GetMovesSize()
     {
         return moves.Length;
@@ -173,6 +177,11 @@ public class Monster : MonoBehaviour
         spattack.SetParent(this);
         spdefense.SetParent(this);
         speed.SetParent(this);
+    }
+
+    public List<PowerType> GetMonsterTypes()
+    {
+        return monsterTypes;
     }
 }
 

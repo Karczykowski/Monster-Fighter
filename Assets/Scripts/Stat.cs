@@ -7,6 +7,7 @@ using UnityEngine;
     public int ivStat;
     public int evStat;
 
+
     public float natureMultiplier = 1;
 
     protected Monster parent;

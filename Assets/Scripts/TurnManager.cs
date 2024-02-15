@@ -12,6 +12,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private UI ui;
     [SerializeField] private float actionDelayTime;
+    [SerializeField] DamageCalculator damageCalculator;
 
     private void Start()
     {
@@ -68,17 +69,8 @@ public class TurnManager : MonoBehaviour
             enemyMonster = playerStation.currentMonster;
         }
         
-        int baseDamage = GetBaseDamage(currentMove, currentMonster, enemyMonster);
-        string everyPossibleDmg = "";
-        for(float i=0.85f;i<=1;i+=0.01f)
-        {
-            everyPossibleDmg += Mathf.Round(i * baseDamage) + ", " ;
-        }
-        Debug.Log(everyPossibleDmg);
-        float random = Random.Range(85,100)/100f;
-        Debug.Log("Random multiplyer: " + random);
-        int finalDamage = (int)Mathf.Round(baseDamage * random);
-        Debug.Log("Final Damage: " + finalDamage);
+        int finalDamage = damageCalculator.GetFinalDamage(currentMove, currentMonster, enemyMonster);
+
         enemyMonster.GetHp().SetCurrentHp(enemyMonster.GetHp().GetCurrentHp() - finalDamage);
 
         if (player)
@@ -91,33 +83,10 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    int GetBaseDamage(Move currentMove, Monster currentMonster, Monster enemyMonster)
-    {
-        int baseDamage = 0;
-        int effectiveAttack;
-        int effectiveDefense;
-
-        if (currentMove.moveCategory == MoveCategory.physical)
-        {
-            effectiveAttack = currentMonster.GetAttack().GetFinalStat();
-            effectiveDefense = enemyMonster.GetDefense().GetFinalStat();
-        }
-        else
-        {
-            effectiveAttack = currentMonster.GetSpattack().GetFinalStat();
-            effectiveDefense = enemyMonster.GetSpdefense().GetFinalStat();
-        }
-
-
-        if (currentMove.moveCategory != MoveCategory.status)
-        {
-            baseDamage = (((2 * currentMonster.GetLevel() / 5) + 2) * currentMove.movePower * (effectiveAttack / effectiveDefense) / 50) + 2;
-        }
-        return baseDamage;
-    }
-
     public void GameOver()
     {
         gameOverPanel.SetActive(true);
     }
+
+    
 }

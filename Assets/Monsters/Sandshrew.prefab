@@ -106,7 +106,19 @@ PrefabInstance:
     - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
       propertyPath: moves.Array.data[0]
       value: 
-      objectReference: {fileID: 7896485343592981444, guid: e423f05d7e6e4f44ba9e0c169fe0d330, type: 3}
+      objectReference: {fileID: 689581056467999965, guid: 71f8cba64d1f1994c92db00333c14cfa, type: 3}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: moves.Array.data[1]
+      value: 
+      objectReference: {fileID: 689581056467999965, guid: df3e7ba1599132044bc1c5a3a0cdcf4e, type: 3}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: moves.Array.data[2]
+      value: 
+      objectReference: {fileID: 689581056467999965, guid: 30213543a60b5054095e22fd023d4b23, type: 3}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: moves.Array.data[3]
+      value: 
+      objectReference: {fileID: 689581056467999965, guid: ba6e35dcb0e2a1c4f9d188fc2575bd55, type: 3}
     - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
       propertyPath: monsterTypes.Array.size
       value: 1
@@ -114,6 +126,10 @@ PrefabInstance:
     - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
       propertyPath: monsterTypes.Array.data[0]
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: monsterTypes.Array.data[1]
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
