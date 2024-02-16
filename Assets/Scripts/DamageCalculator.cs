@@ -424,6 +424,17 @@ public class DamageCalculator : MonoBehaviour
             return 0;
         }
     }
+
+    public float GetFinalEffectivenessByEnum(PowerType attackingTypeEnum, Monster defendingMonster)
+    {
+        float finalEffectiveness = 1;
+
+        for (int i = 0; i < defendingMonster.GetMonsterTypes().Count; i++)
+        {
+            finalEffectiveness *= GetEffectivenessByEnum(attackingTypeEnum, defendingMonster.GetMonsterTypes()[i]);
+        }
+            return finalEffectiveness;
+    }
     public float GetBaseDamage(Move currentMove, Monster currentMonster, Monster enemyMonster)
     {
         float baseDamage = 0;
@@ -466,18 +477,16 @@ public class DamageCalculator : MonoBehaviour
             }
         }
 
-        float type = 1f;
-        for (int i=0;i<enemyMonster.GetMonsterTypes().Count;i++)
-        {
-            type *= GetEffectivenessByEnum(currentMove.moveType, enemyMonster.GetMonsterTypes()[i]);
-        }
+        float type = GetFinalEffectivenessByEnum(currentMove.moveType, enemyMonster);
+
         Debug.Log(currentMonster.GetMonsterName() + " Type effectiveness: " + type);
 
         int finalDamage = (int)((int)((int)((int)baseDamage * random) * stab) * type);
         //ShowPossibleDamage((int)(baseDamage * type));
         //int finalDamage = (int)(baseDamage * random * type);
         ShowPossibleDamage(baseDamage, stab, type);
-        Debug.Log(currentMonster.GetMonsterName() + " Final Damage: " + finalDamage);
+        Debug.Log(currentMonster.GetMonsterName() + " " +
+            "Final Damage: " + finalDamage);
 
         return finalDamage;
     }

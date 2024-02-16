@@ -28,28 +28,35 @@ public class TurnManager : MonoBehaviour
         Monster firstMonster;
         Monster secondMonster;
         int enemyMoveIndex = 0;
+        bool isPlayerFaster;
+
         if(playerStation.currentMonster.GetSpeed().GetFinalStat() > enemyStation.currentMonster.GetSpeed().GetFinalStat())
         {
             firstMonster = playerStation.currentMonster;
             secondMonster = enemyStation.currentMonster;
-            ui.DisableAttackPanel();
-            yield return new WaitForSeconds(actionDelayTime);
-            ExecuteAction(playerMoveIndex, true);
-            yield return new WaitForSeconds(actionDelayTime);
-            ExecuteAction(enemyMoveIndex, false);
-            ui.EnableAttackPanel();
+            isPlayerFaster = true;
         }
         else
         {
             firstMonster = enemyStation.currentMonster;
             secondMonster = playerStation.currentMonster;
-            ui.DisableAttackPanel();
-            yield return new WaitForSeconds(actionDelayTime);
-            ExecuteAction(enemyMoveIndex, false);
-            yield return new WaitForSeconds(actionDelayTime);
-            ExecuteAction(playerMoveIndex, true);
-            ui.EnableAttackPanel();
+            isPlayerFaster = false;
+            (enemyMoveIndex, playerMoveIndex) = (playerMoveIndex, enemyMoveIndex);
         }
+
+        ui.ShowTextUseMove(firstMonster, firstMonster.GetMove(playerMoveIndex));
+        yield return new WaitForSeconds(actionDelayTime);
+        ExecuteAction(playerMoveIndex, isPlayerFaster);
+        ui.ShowTextEffectiveness(damageCalculator.GetFinalEffectivenessByEnum(firstMonster.GetMove(playerMoveIndex).moveType, secondMonster));
+        yield return new WaitForSeconds(actionDelayTime);
+
+        ui.ShowTextUseMove(secondMonster, secondMonster.GetMove(enemyMoveIndex));
+        yield return new WaitForSeconds(actionDelayTime);
+        ExecuteAction(enemyMoveIndex, !isPlayerFaster);
+        ui.ShowTextEffectiveness(damageCalculator.GetFinalEffectivenessByEnum(secondMonster.GetMove(enemyMoveIndex).moveType, firstMonster));
+        yield return new WaitForSeconds(actionDelayTime);
+
+        ui.EnableAttackPanel();
     }
     public void ExecuteAction(int moveIndex, bool player)
     {

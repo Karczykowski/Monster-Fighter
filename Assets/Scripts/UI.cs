@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     private StationStance currentStance;
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject attackPanel;
+    [SerializeField] GameObject textPanel;
     [SerializeField] Button[] moveButtons;
     private void Start()
     {
@@ -48,12 +49,30 @@ public class UI : MonoBehaviour
         }
     }
 
+    public void ShowTextUseMove(Monster monster, Move move)
+    {
+        DisableAttackPanel();
+        EnableTextPanel();
+        textPanel.GetComponentInChildren<TextMeshProUGUI>().text = $"{monster.GetMonsterName()} used {move.name}";
+    }
+
+    public void ShowTextEffectiveness(float typeEffectiveness)
+    {
+        DisableAttackPanel();
+        EnableTextPanel();
+        if(typeEffectiveness > 1)
+            textPanel.GetComponentInChildren<TextMeshProUGUI>().text = "It's super effective!";
+        else if(typeEffectiveness < 1)
+            textPanel.GetComponentInChildren<TextMeshProUGUI>().text = "It's not very effective"; 
+    }
     public void DisableInfoPanel()
     {
         infoPanel.SetActive(false);
     }
     public void EnableInfoPanel()
     {
+        attackPanel.SetActive(false);
+        textPanel.SetActive(false);
         infoPanel.SetActive(true);
     }
     public void DisableAttackPanel()
@@ -62,6 +81,18 @@ public class UI : MonoBehaviour
     }
     public void EnableAttackPanel()
     {
+        textPanel.SetActive(false);
+        infoPanel.SetActive(false);
         attackPanel.SetActive(true);
+    }
+    public void DisableTextPanel()
+    {
+        textPanel.SetActive(false);
+    }
+    public void EnableTextPanel()
+    {
+        attackPanel.SetActive(false);
+        infoPanel.SetActive(false);
+        textPanel.SetActive(true);
     }
 }
