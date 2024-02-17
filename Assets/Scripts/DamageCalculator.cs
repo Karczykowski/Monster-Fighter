@@ -460,43 +460,69 @@ public class DamageCalculator : MonoBehaviour
         return baseDamage;
     }
 
-    public int GetFinalDamage(Move currentMove, Monster currentMonster, Monster enemyMonster)
+    public float GetCriticalDamage()
     {
-        float baseDamage = GetBaseDamage(currentMove, currentMonster, enemyMonster);
+        int randomNumber = Random.Range(0, 16);
+        if (randomNumber == 0)
+            return 1.5f;
+        return 1f;
+    }
 
-        float random = Random.Range(85, 101) / 100f;
-        Debug.Log(currentMonster.GetMonsterName() + " Random multiplyer: " + random);
+    public float GetRandomDamage()
+    {
+        return Random.Range(85, 101) / 100f;
+    }
 
-        float stab = 1;
-        for(int i = 0; i < currentMonster.GetMonsterTypes().Count; i++)
+    public float GetStabDamage(Move move, Monster monster)
+    {
+        for (int i = 0; i < monster.GetMonsterTypes().Count; i++)
         {
-            if (currentMove.moveType == currentMonster.GetMonsterTypes()[i])
+            if (move.moveType == monster.GetMonsterTypes()[i])
             {
-                stab = 1.5f;
-                break;
+                return 1.5f;
             }
         }
+        return 1f;
+    }
+
+    public Dictionary<string, float> GetFinalInfo(Move currentMove, Monster currentMonster, Monster enemyMonster)
+    {
+        Dictionary<string, float> info = new Dictionary<string, float>();
+        float baseDamage = GetBaseDamage(currentMove, currentMonster, enemyMonster);
+
+        float critical = GetCriticalDamage();
+        Debug.Log(currentMonster.GetMonsterName() + " Critical multiplyer: " + critical);
+
+        float random = GetRandomDamage();
+        Debug.Log(currentMonster.GetMonsterName() + " Random multiplyer: " + random);
+
+        float stab = GetStabDamage(currentMove, currentMonster);
+        Debug.Log(currentMonster.GetMonsterName() + " Stab multiplyer: " + stab);
 
         float type = GetFinalEffectivenessByEnum(currentMove.moveType, enemyMonster);
-
         Debug.Log(currentMonster.GetMonsterName() + " Type effectiveness: " + type);
 
-        int finalDamage = (int)((int)((int)((int)baseDamage * random) * stab) * type);
-        //ShowPossibleDamage((int)(baseDamage * type));
-        //int finalDamage = (int)(baseDamage * random * type);
-        ShowPossibleDamage(baseDamage, stab, type);
+        int finalDamage = (int)((int)((int)((int)((int)baseDamage * critical) * random) * stab) * type);
+        ShowPossibleDamage(baseDamage, critical, stab, type);
         Debug.Log(currentMonster.GetMonsterName() + " " +
             "Final Damage: " + finalDamage);
 
-        return finalDamage;
+        info.Add("baseDamage", baseDamage);
+        info.Add("critical", critical);
+        info.Add("random", random);
+        info.Add("stab", stab);
+        info.Add("type", type);
+        info.Add("finalDamage", finalDamage);
+
+        return info;
     }
 
-    private void ShowPossibleDamage(float baseDamage, float stab, float type)
+    private void ShowPossibleDamage(float baseDamage, float critical, float stab, float type)
     {
         string everyPossibleDmg = "";
         for (float i = 85; i <= 100; i++)
         {
-            everyPossibleDmg += (int)((int)((int)((int)baseDamage * i/100) * stab) * type) + ", ";
+            everyPossibleDmg += (int)((int)((int)((int)((int)baseDamage * critical) * i/100) * stab) * type) + ", ";
         }
         Debug.Log(everyPossibleDmg);
     }

@@ -44,21 +44,39 @@ public class TurnManager : MonoBehaviour
             (enemyMoveIndex, playerMoveIndex) = (playerMoveIndex, enemyMoveIndex);
         }
 
+        // First Monster Attacks
         ui.ShowTextUseMove(firstMonster, firstMonster.GetMove(playerMoveIndex));
         yield return new WaitForSeconds(actionDelayTime);
-        ExecuteAction(playerMoveIndex, isPlayerFaster);
-        ui.ShowTextEffectiveness(damageCalculator.GetFinalEffectivenessByEnum(firstMonster.GetMove(playerMoveIndex).moveType, secondMonster));
-        yield return new WaitForSeconds(actionDelayTime);
+        Dictionary<string, float> firstMonsterInfo = ExecuteAction(playerMoveIndex, isPlayerFaster);
 
+        if (ui.ShowTextCriticalHit(firstMonsterInfo["critical"]))
+        {
+            yield return new WaitForSeconds(actionDelayTime);
+        }
+
+        if(ui.ShowTextEffectiveness(firstMonsterInfo["type"]))
+        {
+            yield return new WaitForSeconds(actionDelayTime);
+        }
+        
+        // Second Monster Attacks;
         ui.ShowTextUseMove(secondMonster, secondMonster.GetMove(enemyMoveIndex));
         yield return new WaitForSeconds(actionDelayTime);
-        ExecuteAction(enemyMoveIndex, !isPlayerFaster);
-        ui.ShowTextEffectiveness(damageCalculator.GetFinalEffectivenessByEnum(secondMonster.GetMove(enemyMoveIndex).moveType, firstMonster));
-        yield return new WaitForSeconds(actionDelayTime);
+        Dictionary<string, float> secondMonsterInfo = ExecuteAction(enemyMoveIndex, !isPlayerFaster);
+
+        if (ui.ShowTextCriticalHit(secondMonsterInfo["critical"]))
+        {
+            yield return new WaitForSeconds(actionDelayTime);
+        }
+
+        if(ui.ShowTextEffectiveness(secondMonsterInfo["type"]))
+        {
+            yield return new WaitForSeconds(actionDelayTime);
+        }
 
         ui.EnableAttackPanel();
     }
-    public void ExecuteAction(int moveIndex, bool player)
+    public Dictionary<string, float> ExecuteAction(int moveIndex, bool player)
     {
         Move currentMove;
         Monster currentMonster;
@@ -76,7 +94,8 @@ public class TurnManager : MonoBehaviour
             enemyMonster = playerStation.currentMonster;
         }
         
-        int finalDamage = damageCalculator.GetFinalDamage(currentMove, currentMonster, enemyMonster);
+        Dictionary<string, float> DamageInfoList = damageCalculator.GetFinalInfo(currentMove, currentMonster, enemyMonster);
+        int finalDamage = (int)DamageInfoList["finalDamage"];
 
         enemyMonster.GetHp().SetCurrentHp(enemyMonster.GetHp().GetCurrentHp() - finalDamage);
 
@@ -88,6 +107,8 @@ public class TurnManager : MonoBehaviour
         {
             playerStation.UpdateHp();
         }
+
+        return DamageInfoList;
     }
 
     public void GameOver()

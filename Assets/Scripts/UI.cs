@@ -56,14 +56,33 @@ public class UI : MonoBehaviour
         textPanel.GetComponentInChildren<TextMeshProUGUI>().text = $"{monster.GetMonsterName()} used {move.name}";
     }
 
-    public void ShowTextEffectiveness(float typeEffectiveness)
+    public bool ShowTextEffectiveness(float typeEffectiveness)
     {
         DisableAttackPanel();
         EnableTextPanel();
         if(typeEffectiveness > 1)
+        {
             textPanel.GetComponentInChildren<TextMeshProUGUI>().text = "It's super effective!";
+            return true;
+        }
         else if(typeEffectiveness < 1)
-            textPanel.GetComponentInChildren<TextMeshProUGUI>().text = "It's not very effective"; 
+        {
+            textPanel.GetComponentInChildren<TextMeshProUGUI>().text = "It's not very effective";
+            return true;
+        }
+        return false;
+    }
+
+    public bool ShowTextCriticalHit(float critical)
+    {
+        if(critical != 1)
+        {
+            DisableAttackPanel();
+            EnableTextPanel();
+            textPanel.GetComponentInChildren<TextMeshProUGUI>().text = "It's a critical hit!";
+            return true;
+        }
+        return false;
     }
     public void DisableInfoPanel()
     {
