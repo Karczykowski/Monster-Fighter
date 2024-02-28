@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2079454378177636164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1519874407294946764, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_Name
+      value: Pikachu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710907537130872484, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: level
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: backSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: efb8df30dd5e28a469e37e82d14236c5, type: 3}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: frontSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc6039ece4b7cfd4b9412111337ec80e, type: 3}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: hp.baseStat
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: monsterName
+      value: Pikachu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: speed.baseStat
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: attack.baseStat
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: defense.baseStat
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: spattack.baseStat
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: spdefense.baseStat
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: moves.Array.data[0]
+      value: 
+      objectReference: {fileID: 689581056467999965, guid: 71f8cba64d1f1994c92db00333c14cfa, type: 3}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: moves.Array.data[1]
+      value: 
+      objectReference: {fileID: 4842811107869192173, guid: 84f24112ed7c9d24d9f251416add3e5d, type: 3}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: monsterTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743209948996999690, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
+      propertyPath: monsterTypes.Array.data[0]
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b1bf01f5c7be214ca5c8af220ab794d, type: 3}
