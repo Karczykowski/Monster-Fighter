@@ -76,6 +76,30 @@ public class TurnManager : MonoBehaviour
 
         ui.EnableAttackPanel();
     }
+    public IEnumerator PlayTurnEnumerator()
+    {
+        Monster firstMonster = playerStation.currentMonster;
+        Monster secondMonster = enemyStation.currentMonster;
+        int enemyMoveIndex = 0;
+        bool isPlayerFaster = false;
+
+        // przeciwnik atakuje
+        ui.ShowTextUseMove(secondMonster, secondMonster.GetMove(enemyMoveIndex));
+        yield return new WaitForSeconds(actionDelayTime);
+        Dictionary<string, float> secondMonsterInfo = ExecuteAction(enemyMoveIndex, isPlayerFaster);
+
+        if (ui.ShowTextCriticalHit(secondMonsterInfo["critical"]))
+        {
+            yield return new WaitForSeconds(actionDelayTime);
+        }
+
+        if (ui.ShowTextEffectiveness(secondMonsterInfo["type"]))
+        {
+            yield return new WaitForSeconds(actionDelayTime);
+        }
+
+        ui.InfoOption();
+    }
     public Dictionary<string, float> ExecuteAction(int moveIndex, bool player)
     {
         Move currentMove;

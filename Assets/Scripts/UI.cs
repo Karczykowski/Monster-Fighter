@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     [SerializeField] GameObject infoPanel;
     [SerializeField] GameObject attackPanel;
     [SerializeField] GameObject textPanel;
+    [SerializeField] GameObject switchPanel;
     [SerializeField] Button[] moveButtons;
     private void Start()
     {
@@ -26,9 +27,16 @@ public class UI : MonoBehaviour
         currentStance = StationStance.ATTACK;
     }
 
+    public void SwitchOption()
+    {
+        DisableInfoPanel();
+        EnableSwitchPanel();
+    }
+
     public void InfoOption()
     {
         DisableAttackPanel();
+        DisableSwitchPanel();
         EnableInfoPanel();
         currentStance = StationStance.DEFAULT;
     }
@@ -45,6 +53,7 @@ public class UI : MonoBehaviour
             else
             {
                 moveButtons[i].interactable = false;
+                moveButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "-";
             }
         }
     }
@@ -92,6 +101,7 @@ public class UI : MonoBehaviour
     {
         attackPanel.SetActive(false);
         textPanel.SetActive(false);
+        switchPanel.SetActive(false);
         infoPanel.SetActive(true);
     }
     public void DisableAttackPanel()
@@ -102,6 +112,7 @@ public class UI : MonoBehaviour
     {
         textPanel.SetActive(false);
         infoPanel.SetActive(false);
+        switchPanel.SetActive(false);
         attackPanel.SetActive(true);
     }
     public void DisableTextPanel()
@@ -112,6 +123,19 @@ public class UI : MonoBehaviour
     {
         attackPanel.SetActive(false);
         infoPanel.SetActive(false);
+        switchPanel.SetActive(false);
         textPanel.SetActive(true);
+    }
+
+    public void DisableSwitchPanel()
+    {
+        switchPanel.SetActive(false);
+    }
+    public void EnableSwitchPanel()
+    {
+        attackPanel.SetActive(false);
+        infoPanel.SetActive(false);
+        textPanel.SetActive(false);
+        switchPanel.SetActive(true);
     }
 }

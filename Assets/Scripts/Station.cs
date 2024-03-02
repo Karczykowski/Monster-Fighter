@@ -20,8 +20,11 @@ public class Station : MonoBehaviour
     public void SendMonster(Monster monster)
     {
         currentMonster = monster;
+        
         nameText.text = monster.GetMonsterName();
-        hpSlider.maxValue = monster.GetHp().GetFinalStat();
+        
+        hpSlider.maxValue = currentMonster.GetHp().GetFinalStat();
+        
         UpdateHp();
         if (!isFront)
         {
@@ -32,6 +35,7 @@ public class Station : MonoBehaviour
             spritePosition.sprite = monster.GetBackSprite();
             _ui.UpdateMoveText(monster);
         }
+        
     }
 
     public void UpdateHp()
