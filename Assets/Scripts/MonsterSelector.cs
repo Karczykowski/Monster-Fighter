@@ -23,12 +23,24 @@ public class MonsterSelector : MonoBehaviour
 
     [SerializeField] private UI ui;
 
+    public bool[] deadMonsters;
+
+    private void Start()
+    {
+        deadMonsters = new bool[6];
+        for(int i=0;i<deadMonsters.Length;i++)
+        {
+            deadMonsters[i] = false;
+        }
+
+        StartGame();
+    }
 
     public void StartGame()
     {
         InstantiateMonsters();
-        playerStation.SendMonster(playerMonsters[0]);
-        enemyStation.SendMonster(Instantiate(InitialEnemyMonsters[0], Vector2.zero, Quaternion.identity));
+        playerStation.SendMonster(playerMonsters[0], 0);
+        enemyStation.SendMonster(Instantiate(InitialEnemyMonsters[0], Vector2.zero, Quaternion.identity), 0);
         FillTeamButtons();
         attackButton.interactable = true;
         switchButton.interactable = true;
@@ -58,11 +70,31 @@ public class MonsterSelector : MonoBehaviour
         }
     }
 
+    private void DisableDeadMonsterSwitch()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (deadMonsters[i])
+            {
+                playerTeamButtons[i].interactable = false;
+            }
+        }
+    }
+
     public void SwitchMonster(int index)
     {
-        playerStation.SendMonster(playerMonsters[index]);
+        playerStation.SendMonster(playerMonsters[index], index);
         DisableActiveMonsterSwitch();
-        turnManager.StartCoroutine(turnManager.PlayTurnEnumerator());
+        DisableDeadMonsterSwitch();
+        if(turnManager.isCurrentMonsterAlive)
+        {
+            turnManager.StartCoroutine(turnManager.PlayTurnEnumerator());
+        }
+        else
+        {
+            turnManager.isCurrentMonsterAlive = true;
+            ui.InfoOption();
+        }
     }
 
     private void InstantiateMonsters()
@@ -73,5 +105,10 @@ public class MonsterSelector : MonoBehaviour
         {
             playerMonsters.Add(Instantiate(monster, Vector2.zero, Quaternion.identity));
         }
+    }
+
+    public void setMonsterDead(int index)
+    {
+        deadMonsters[index] = true;
     }
 }

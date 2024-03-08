@@ -868,6 +868,7 @@ MonoBehaviour:
   - {fileID: 946401585}
   - {fileID: 609363272}
   - {fileID: 1427521699}
+  backFromSwitchButton: {fileID: 766139319}
 --- !u!1 &219971978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,6 +1209,8 @@ MonoBehaviour:
   ui: {fileID: 219881535}
   actionDelayTime: 1
   damageCalculator: {fileID: 296122847}
+  monsterSelector: {fileID: 1208264049}
+  isCurrentMonsterAlive: 0
 --- !u!114 &296122847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,6 +2215,7 @@ MonoBehaviour:
   statusText: {fileID: 1526260829}
   hpSlider: {fileID: 2132921399}
   spritePosition: {fileID: 759312425}
+  currentMonsterIndex: 0
   isFront: 1
   _ui: {fileID: 219881535}
   turnManager: {fileID: 296122846}
@@ -4279,8 +4283,8 @@ MonoBehaviour:
   - {fileID: 1064005416623914478, guid: 13a2ce45ae5399b4e8d1c96c017bd606, type: 3}
   - {fileID: 1173367107940274805, guid: 28b0a782cb801284b9a7c16fc2d48f5e, type: 3}
   InitialEnemyMonsters:
-  - {fileID: 5640718128865100036, guid: cc290112c29ab7d4fb12934cda56592b, type: 3}
   - {fileID: 1173367107940274805, guid: 28b0a782cb801284b9a7c16fc2d48f5e, type: 3}
+  - {fileID: 5640718128865100036, guid: cc290112c29ab7d4fb12934cda56592b, type: 3}
   - {fileID: 6821749257166129839, guid: 5e79ed93e62e8b740aadbcf7db47b1a1, type: 3}
   - {fileID: 6703872942699724110, guid: a61d165abb0c43741bc4d50eab2591eb, type: 3}
   playerTeamButtons:
@@ -4294,6 +4298,7 @@ MonoBehaviour:
   attackButton: {fileID: 74021518}
   switchButton: {fileID: 1536868924}
   ui: {fileID: 219881535}
+  deadMonsters: 
 --- !u!4 &1208264050
 Transform:
   m_ObjectHideFlags: 0
@@ -5758,7 +5763,7 @@ MonoBehaviour:
       - m_Target: {fileID: 219881535}
         m_TargetAssemblyTypeName: UI, Assembly-CSharp
         m_MethodName: SwitchOption
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7690,6 +7695,7 @@ MonoBehaviour:
   statusText: {fileID: 443687358}
   hpSlider: {fileID: 1625427123}
   spritePosition: {fileID: 1306257478}
+  currentMonsterIndex: 0
   isFront: 0
   _ui: {fileID: 219881535}
   turnManager: {fileID: 296122846}

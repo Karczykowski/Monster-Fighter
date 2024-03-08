@@ -13,6 +13,7 @@ public class UI : MonoBehaviour
     [SerializeField] GameObject textPanel;
     [SerializeField] GameObject switchPanel;
     [SerializeField] Button[] moveButtons;
+    [SerializeField] Button backFromSwitchButton;
     private void Start()
     {
         currentStance = StationStance.DEFAULT;
@@ -27,10 +28,15 @@ public class UI : MonoBehaviour
         currentStance = StationStance.ATTACK;
     }
 
-    public void SwitchOption()
+    public void SwitchOption(bool isForced = false)
     {
+        backFromSwitchButton.interactable = true;
         DisableInfoPanel();
         EnableSwitchPanel();
+        if(isForced)
+        {
+            backFromSwitchButton.interactable = false;
+        }
     }
 
     public void InfoOption()

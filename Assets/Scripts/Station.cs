@@ -12,13 +12,16 @@ public class Station : MonoBehaviour
     [SerializeField] TextMeshProUGUI statusText;
     [SerializeField] Slider hpSlider;
     [SerializeField] SpriteRenderer spritePosition;
+    public int currentMonsterIndex;
 
     [SerializeField] bool isFront;
     [SerializeField] UI _ui;
     [SerializeField] TurnManager turnManager;
 
-    public void SendMonster(Monster monster)
+    public void SendMonster(Monster monster, int index)
     {
+        currentMonsterIndex = index;
+
         currentMonster = monster;
         
         nameText.text = monster.GetMonsterName();
@@ -44,10 +47,6 @@ public class Station : MonoBehaviour
         int newHp = currentMonster.GetHp().GetCurrentHp();
         hpText.text = $"{newHp} / {maxHp}";
         hpSlider.value = newHp;
-        if(newHp == 0)
-        {
-            turnManager.GameOver();
-        }
     }
 
 }

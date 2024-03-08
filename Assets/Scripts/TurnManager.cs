@@ -13,10 +13,13 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private UI ui;
     [SerializeField] private float actionDelayTime;
     [SerializeField] DamageCalculator damageCalculator;
+    [SerializeField] private MonsterSelector monsterSelector;
+    public bool isCurrentMonsterAlive;
 
     private void Start()
     {
         state = BattleState.START;
+        isCurrentMonsterAlive = true;
     }
     public void PlayTurn(int playerMoveIndex)
     {
@@ -60,21 +63,32 @@ public class TurnManager : MonoBehaviour
         }
         
         // Second Monster Attacks;
-        ui.ShowTextUseMove(secondMonster, secondMonster.GetMove(enemyMoveIndex));
-        yield return new WaitForSeconds(actionDelayTime);
-        Dictionary<string, float> secondMonsterInfo = ExecuteAction(enemyMoveIndex, !isPlayerFaster);
-
-        if (ui.ShowTextCriticalHit(secondMonsterInfo["critical"]))
+        if(isCurrentMonsterAlive)
         {
+            ui.ShowTextUseMove(secondMonster, secondMonster.GetMove(enemyMoveIndex));
             yield return new WaitForSeconds(actionDelayTime);
-        }
+            Dictionary<string, float> secondMonsterInfo = ExecuteAction(enemyMoveIndex, !isPlayerFaster);
 
-        if(ui.ShowTextEffectiveness(secondMonsterInfo["type"]))
+            if (ui.ShowTextCriticalHit(secondMonsterInfo["critical"]))
+            {
+                yield return new WaitForSeconds(actionDelayTime);
+            }
+
+            if (ui.ShowTextEffectiveness(secondMonsterInfo["type"]))
+            {
+                yield return new WaitForSeconds(actionDelayTime);
+            }
+        }
+        
+
+        if(isCurrentMonsterAlive)
         {
-            yield return new WaitForSeconds(actionDelayTime);
+            ui.EnableAttackPanel();
         }
-
-        ui.EnableAttackPanel();
+        else
+        {
+            ui.SwitchOption(true);
+        }
     }
     public IEnumerator PlayTurnEnumerator()
     {
@@ -130,6 +144,11 @@ public class TurnManager : MonoBehaviour
         else
         {
             playerStation.UpdateHp();
+            if (playerStation.currentMonster.GetHp().GetCurrentHp() == 0)
+            {
+                isCurrentMonsterAlive = false;
+                monsterSelector.setMonsterDead(playerStation.currentMonsterIndex);
+            }
         }
 
         return DamageInfoList;
