@@ -13,7 +13,8 @@ public class MonsterSelector : MonoBehaviour
 
     [SerializeField] private List<Monster> InitialPlayerMonsters;
     [SerializeField] private List<Monster> InitialEnemyMonsters;
-    private List<Monster> playerMonsters; 
+    private List<Monster> playerMonsters;
+    private List<Monster> enemyMonsters;
 
     [SerializeField] private List<Button> playerTeamButtons;
     [SerializeField] private List<Button> enemyTeamButtons;
@@ -24,9 +25,11 @@ public class MonsterSelector : MonoBehaviour
     [SerializeField] private UI ui;
 
     public bool[] deadMonsters;
+    public int currentEnemyIndex;
 
     private void Start()
     {
+        currentEnemyIndex = 0;
         deadMonsters = new bool[InitialPlayerMonsters.Count];
         for(int i=0;i<deadMonsters.Length;i++)
         {
@@ -38,9 +41,10 @@ public class MonsterSelector : MonoBehaviour
 
     public void StartGame()
     {
-        InstantiateMonsters();
+        InstantiatePlayerMonsters();
+        InstantiateEnemyMonsters();
         playerStation.SendMonster(playerMonsters[0], 0);
-        enemyStation.SendMonster(Instantiate(InitialEnemyMonsters[0], Vector2.zero, Quaternion.identity), 0);
+        enemyStation.SendMonster(enemyMonsters[0], 0);
         FillTeamButtons();
         attackButton.interactable = true;
         switchButton.interactable = true;
@@ -97,13 +101,22 @@ public class MonsterSelector : MonoBehaviour
         }
     }
 
-    private void InstantiateMonsters()
+    private void InstantiatePlayerMonsters()
     {
         playerMonsters = new List<Monster>();
 
         foreach (var monster in InitialPlayerMonsters)
         {
             playerMonsters.Add(Instantiate(monster, Vector2.zero, Quaternion.identity));
+        }
+    }
+
+    private void InstantiateEnemyMonsters()
+    {
+        enemyMonsters = new List<Monster>();
+        foreach (var monster in InitialEnemyMonsters)
+        {
+            enemyMonsters.Add(Instantiate(monster, Vector2.zero, Quaternion.identity));
         }
     }
 
@@ -134,5 +147,15 @@ public class MonsterSelector : MonoBehaviour
                 result += 1;
         }
         Debug.Log(result);
+    }
+
+    public Monster getEnemyMonster(int index)
+    {
+        return enemyMonsters[index];
+    }
+
+    public int getInitialEnemyMonsterLength()
+    {
+        return InitialEnemyMonsters.Count;
     }
 }

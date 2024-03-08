@@ -10,16 +10,21 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private Station playerStation;
     [SerializeField] private Station enemyStation;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameWonPanel;
     [SerializeField] private UI ui;
     [SerializeField] private float actionDelayTime;
     [SerializeField] DamageCalculator damageCalculator;
     [SerializeField] private MonsterSelector monsterSelector;
     public bool isCurrentMonsterAlive;
+    public bool isEnemyMonsterAlive;
+    public bool isGameOver;
 
     private void Start()
     {
+        isGameOver = false;
         state = BattleState.START;
         isCurrentMonsterAlive = true;
+        isEnemyMonsterAlive = true;
     }
     public void PlayTurn(int playerMoveIndex)
     {
@@ -63,7 +68,7 @@ public class TurnManager : MonoBehaviour
         }
         
         // Second Monster Attacks;
-        if(isCurrentMonsterAlive)
+        if(isCurrentMonsterAlive && isEnemyMonsterAlive)
         {
             ui.ShowTextUseMove(secondMonster, secondMonster.GetMove(enemyMoveIndex));
             yield return new WaitForSeconds(actionDelayTime);
@@ -81,7 +86,7 @@ public class TurnManager : MonoBehaviour
         }
         
 
-        if(isCurrentMonsterAlive)
+        if(isCurrentMonsterAlive && !isGameOver)
         {
             ui.EnableAttackPanel();
         }
@@ -94,6 +99,11 @@ public class TurnManager : MonoBehaviour
                 gameOverPanel.SetActive(true);
             }
         }
+        if(isGameOver)
+        {
+            ui.DisableSwitchPanel();
+        }
+        isEnemyMonsterAlive = true;
     }
     public IEnumerator PlayTurnEnumerator()
     {
@@ -145,6 +155,20 @@ public class TurnManager : MonoBehaviour
         if (player)
         {
             enemyStation.UpdateHp();
+            if(enemyStation.currentMonster.GetHp().GetCurrentHp() == 0)
+            {
+                isEnemyMonsterAlive = false;
+                monsterSelector.currentEnemyIndex++;
+                if (monsterSelector.currentEnemyIndex >= monsterSelector.getInitialEnemyMonsterLength())
+                {
+                    gameWonPanel.SetActive(true);
+                    isGameOver = true;
+                }
+                else
+                {
+                    enemyStation.SendMonster(monsterSelector.getEnemyMonster(monsterSelector.currentEnemyIndex), monsterSelector.currentEnemyIndex);
+                }
+            }
         }
         else
         {
