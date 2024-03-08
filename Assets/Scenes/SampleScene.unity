@@ -4273,16 +4273,16 @@ MonoBehaviour:
   turnManager: {fileID: 296122846}
   playerStation: {fileID: 586121639}
   enemyStation: {fileID: 1981904301}
-  playerMonsters:
+  InitialPlayerMonsters:
   - {fileID: 6722098768043433626, guid: 44227b97fa25c8e45bd7cd2d550b8922, type: 3}
-  - {fileID: 1173367107940274805, guid: 28b0a782cb801284b9a7c16fc2d48f5e, type: 3}
-  - {fileID: 6703872942699724110, guid: a61d165abb0c43741bc4d50eab2591eb, type: 3}
-  - {fileID: 4923136363415718678, guid: ef87cd052322bba4b847804e871ffd11, type: 3}
-  enemyMonsters:
-  - {fileID: 4923136363415718678, guid: ef87cd052322bba4b847804e871ffd11, type: 3}
-  - {fileID: 3001708657875717198, guid: fe8dec638bd88ed45a7f746792ee7869, type: 3}
-  - {fileID: 1064005416623914478, guid: 13a2ce45ae5399b4e8d1c96c017bd606, type: 3}
   - {fileID: 6821749257166129839, guid: 5e79ed93e62e8b740aadbcf7db47b1a1, type: 3}
+  - {fileID: 1064005416623914478, guid: 13a2ce45ae5399b4e8d1c96c017bd606, type: 3}
+  - {fileID: 1173367107940274805, guid: 28b0a782cb801284b9a7c16fc2d48f5e, type: 3}
+  InitialEnemyMonsters:
+  - {fileID: 5640718128865100036, guid: cc290112c29ab7d4fb12934cda56592b, type: 3}
+  - {fileID: 1173367107940274805, guid: 28b0a782cb801284b9a7c16fc2d48f5e, type: 3}
+  - {fileID: 6821749257166129839, guid: 5e79ed93e62e8b740aadbcf7db47b1a1, type: 3}
+  - {fileID: 6703872942699724110, guid: a61d165abb0c43741bc4d50eab2591eb, type: 3}
   playerTeamButtons:
   - {fileID: 1159881825}
   - {fileID: 1769498164}

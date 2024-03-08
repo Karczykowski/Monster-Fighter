@@ -11,8 +11,9 @@ public class MonsterSelector : MonoBehaviour
     [SerializeField] private Station playerStation;
     [SerializeField] private Station enemyStation;
 
-    [SerializeField] private List<Monster> playerMonsters;
-    [SerializeField] private List<Monster> enemyMonsters;
+    [SerializeField] private List<Monster> InitialPlayerMonsters;
+    [SerializeField] private List<Monster> InitialEnemyMonsters;
+    private List<Monster> playerMonsters; 
 
     [SerializeField] private List<Button> playerTeamButtons;
     [SerializeField] private List<Button> enemyTeamButtons;
@@ -25,8 +26,9 @@ public class MonsterSelector : MonoBehaviour
 
     public void StartGame()
     {
-        playerStation.SendMonster(Instantiate(playerMonsters[0], Vector2.zero, Quaternion.identity));
-        enemyStation.SendMonster(Instantiate(enemyMonsters[0], Vector2.zero, Quaternion.identity));
+        InstantiateMonsters();
+        playerStation.SendMonster(playerMonsters[0]);
+        enemyStation.SendMonster(Instantiate(InitialEnemyMonsters[0], Vector2.zero, Quaternion.identity));
         FillTeamButtons();
         attackButton.interactable = true;
         switchButton.interactable = true;
@@ -34,16 +36,16 @@ public class MonsterSelector : MonoBehaviour
 
     private void FillTeamButtons()
     {
-        for(int i=0;i<playerMonsters.Count;i++)
+        for(int i=0;i<InitialPlayerMonsters.Count;i++)
         {
-            playerTeamButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = playerMonsters[i].name;
+            playerTeamButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = InitialPlayerMonsters[i].name;
         }
         DisableActiveMonsterSwitch();
     }
 
     private void DisableActiveMonsterSwitch()
     {
-        for (int i = 0; i < playerMonsters.Count; i++)
+        for (int i = 0; i < InitialPlayerMonsters.Count; i++)
         {
             if (playerStation.currentMonster.name.Contains(playerTeamButtons[i].GetComponentInChildren<TextMeshProUGUI>().text))
             {
@@ -58,8 +60,18 @@ public class MonsterSelector : MonoBehaviour
 
     public void SwitchMonster(int index)
     {
-        playerStation.SendMonster(Instantiate(playerMonsters[index], Vector2.zero, Quaternion.identity));
+        playerStation.SendMonster(playerMonsters[index]);
         DisableActiveMonsterSwitch();
         turnManager.StartCoroutine(turnManager.PlayTurnEnumerator());
+    }
+
+    private void InstantiateMonsters()
+    {
+        playerMonsters = new List<Monster>();
+
+        foreach (var monster in InitialPlayerMonsters)
+        {
+            playerMonsters.Add(Instantiate(monster, Vector2.zero, Quaternion.identity));
+        }
     }
 }
