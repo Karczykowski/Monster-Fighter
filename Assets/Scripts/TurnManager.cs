@@ -88,6 +88,11 @@ public class TurnManager : MonoBehaviour
         else
         {
             ui.SwitchOption(true);
+            monsterSelector.printDeadMonsters();
+            if (monsterSelector.areAllMonstersDead())
+            {
+                gameOverPanel.SetActive(true);
+            }
         }
     }
     public IEnumerator PlayTurnEnumerator()

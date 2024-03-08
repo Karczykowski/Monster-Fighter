@@ -27,7 +27,7 @@ public class MonsterSelector : MonoBehaviour
 
     private void Start()
     {
-        deadMonsters = new bool[6];
+        deadMonsters = new bool[InitialPlayerMonsters.Count];
         for(int i=0;i<deadMonsters.Length;i++)
         {
             deadMonsters[i] = false;
@@ -72,7 +72,7 @@ public class MonsterSelector : MonoBehaviour
 
     private void DisableDeadMonsterSwitch()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < InitialPlayerMonsters.Count; i++)
         {
             if (deadMonsters[i])
             {
@@ -110,5 +110,29 @@ public class MonsterSelector : MonoBehaviour
     public void setMonsterDead(int index)
     {
         deadMonsters[index] = true;
+    }
+
+    public bool areAllMonstersDead()
+    {
+        bool result = true;
+        foreach (var monster in deadMonsters)
+        {
+            if (!monster)
+                return false;
+        }
+        return result;
+    }
+
+    public void printDeadMonsters()
+    {
+        string result = "";
+        foreach(var monster in deadMonsters)
+        {
+            if (monster == false)
+                result += 0;
+            else
+                result += 1;
+        }
+        Debug.Log(result);
     }
 }
